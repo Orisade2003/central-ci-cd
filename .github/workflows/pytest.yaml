@@ -1,0 +1,26 @@
+name: pytest
+
+# Define when this workflow should run
+on:
+  workflow_call:
+    inputs:
+      docker-image:
+        required: true
+        type: string
+    secrets:
+      DOCKERHUB_USERNAME:
+        required: true
+      DOCKERHUB_PASSWORD:
+        required: true
+# Define the jobs
+jobs:
+  build:
+    runs-on: [self-hosted]
+    container:
+      image: ${{inputs.app-name}}
+      credentials:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    steps:
+    - name: Run Pytest .
+      run: pytest .
