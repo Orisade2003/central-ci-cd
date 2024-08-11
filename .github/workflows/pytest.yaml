@@ -14,10 +14,10 @@ on:
         required: true
 # Define the jobs
 jobs:
-  build:
+  test:
     runs-on: [self-hosted]
     container:
-      image: ${{inputs.app-name}}
+      image: ${{inputs.docker-image}}
       credentials:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
