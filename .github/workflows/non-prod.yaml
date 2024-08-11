@@ -21,12 +21,13 @@ jobs:
     secrets:
       DOCKERHUB_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
       DOCKERHUB_PASSWORD: ${{secrets.DOCKERHUB_PASSWORD}}
+  
 
   test:
     needs: build
     uses: ./.github/workflows/pytest.yaml
     with:
-      docker-image: ${{ needs.build.outputs.image-name }}
+      docker-image: "${{ needs.build.outputs.image-name }}"
     secrets:
       DOCKERHUB_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
       DOCKERHUB_PASSWORD: ${{secrets.DOCKERHUB_PASSWORD}}
