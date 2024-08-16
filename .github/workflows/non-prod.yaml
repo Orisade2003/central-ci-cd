@@ -37,6 +37,7 @@ jobs:
 
   test:
     runs-on: [self-hosted]
+    needs: build
     container:
       image: $IMAGE_NAME
       credentials:
