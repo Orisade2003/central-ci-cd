@@ -15,7 +15,7 @@ on:
         required: true
 # Define the jobs
 env:
-  IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/${{inputs.app-name}}:${{ github.sha }}
+  IMAGE_NAME: "${{ secrets.DOCKERHUB_USERNAME }}/${{inputs.app-name}}:${{ github.sha }}"
 jobs:
   build:
     runs-on: [self-hosted]
