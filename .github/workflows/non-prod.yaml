@@ -41,14 +41,12 @@ jobs:
   test:
     runs-on: [self-hosted]
     needs: build
-    container:
-      image: "test"
-      credentials:
+    - uses: addnab/docker-run-action@v3
+      with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
-    steps:
-    - name: Run Pytest .
-      run: pytest .
+        image: ${{ env.IMAGE_NAME }}
+        run: pytest .
 
 
 
