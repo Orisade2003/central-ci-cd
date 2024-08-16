@@ -41,12 +41,13 @@ jobs:
   test:
     runs-on: [self-hosted]
     needs: build
-    - uses: addnab/docker-run-action@v3
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_PASSWORD }}
-        image: ${{ env.IMAGE_NAME }}
-        run: pytest .
+    steps: 
+      - uses: addnab/docker-run-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          image: ${{ env.IMAGE_NAME }}
+          run: pytest .
 
 
 
