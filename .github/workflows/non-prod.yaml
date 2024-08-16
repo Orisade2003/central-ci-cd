@@ -13,10 +13,11 @@ on:
       DOCKERHUB_PASSWORD:
         required: true
 # Define the jobs
-env:
-  IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/${{inputs.app-name}}:${{ github.sha }}
+
 jobs:
   build:
+    env:
+      IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/${{inputs.app-name}}:${{ github.sha }}
     runs-on: [self-hosted]
     steps:
     # Check out the repository
@@ -36,6 +37,8 @@ jobs:
         tags: "$IMAGE_NAME"
 
   test:
+    env:
+      IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/${{inputs.app-name}}:${{ github.sha }}
     runs-on: [self-hosted]
     needs: build
     container:
