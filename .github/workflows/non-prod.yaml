@@ -79,9 +79,9 @@ jobs:
         # path: other-repo # Optional: Specify the directory where the repo should be checked out
     
     - name: Install yq
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y yq
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y yq
 
     - name: Change value in YAML file
       run: |
