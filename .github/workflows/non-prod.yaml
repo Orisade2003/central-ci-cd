@@ -13,6 +13,8 @@ on:
         required: true
       DOCKERHUB_PASSWORD:
         required: true
+      GITOPS_REPO_TOKEN:
+        required: true
 # Define the jobs
 env:
   IMAGE_NAME: "${{ secrets.DOCKERHUB_USERNAME }}/${{inputs.app-name}}:${{ github.sha }}"
@@ -65,5 +67,32 @@ jobs:
         TRIVY_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
 
 
+   delpoy-dev:
+   runs-on: [self-hosted]
+   needs: scan
+   steps:
+    - name: Checkout gitops repo
+      uses: actions/checkout@v3
+        with:
+          repository: Orisade2003/gitops-devops-project
+          token: ${{ secrets.GITOPS_REPO_TOKEN }} # Use a token with the appropriate permissions
+          # path: other-repo # Optional: Specify the directory where the repo should be checked out
+    
+    - name: Install yq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y yq
+
+    - name: Change value in YAML file
+      run: |
+        yq e '.image.tag = ${{ github.sha }}' -i environments/dev/values/${{inputs.app-name}}-values.yaml
+
+    - name: Commit changes
+      run: |
+        git config --local user.name "GitHub Actions"
+        git config --local user.email "actions@github.com"
+        git add environments/dev/values/${{inputs.app-name}}-values.yaml
+        git commit -m "Update tag in values file"
+        git push
 
     
