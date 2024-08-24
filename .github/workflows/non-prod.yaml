@@ -73,10 +73,10 @@ jobs:
    steps:
     - name: Checkout gitops repo
       uses: actions/checkout@v3
-        with:
-          repository: Orisade2003/gitops-devops-project
-          token: ${{ secrets.GITOPS_REPO_TOKEN }} # Use a token with the appropriate permissions
-          # path: other-repo # Optional: Specify the directory where the repo should be checked out
+      with:
+        repository: Orisade2003/gitops-devops-project
+        token: ${{ secrets.GITOPS_REPO_TOKEN }} # Use a token with the appropriate permissions
+        # path: other-repo # Optional: Specify the directory where the repo should be checked out
     
     - name: Install yq
         run: |
