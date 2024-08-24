@@ -69,7 +69,7 @@ jobs:
 
   delpoy-dev:
     runs-on: [self-hosted]
-    needs: scan
+    needs: build
     steps:
     - name: Checkout gitops repo
       uses: actions/checkout@v3
