@@ -71,7 +71,7 @@ jobs:
     runs-on: [self-hosted]
     container:
       image: dellnoantechnp/git-yq:latest
-    needs: build
+    # needs: build # add
     steps:
     - name: Checkout gitops repo
       uses: actions/checkout@v3
@@ -87,7 +87,7 @@ jobs:
 
     - name: Change value in YAML file
       run: |
-        yq e '.image.tag = ${{ github.sha }}' -i environments/dev/values/${{inputs.app-name}}-values.yaml
+        yq e '.image.tag = cba1df93eb833a5cf5721320d68fd1839dfc79ea' -i environments/dev/values/${{inputs.app-name}}-values.yaml
 
     - name: Commit changes
       run: |
