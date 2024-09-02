@@ -72,19 +72,18 @@ jobs:
     container:
       image: dellnoantechnp/git-yq:latest
     # needs: build # add
-    steps:
-    - name: Checkout gitops repo
-      uses: actions/checkout@v3
-      with:
-        repository: Orisade2003/gitops-devops-project
-        token: ${{ secrets.GITOPS_REPO_TOKEN }} # Use a token with the appropriate permissions
-        set-safe-directory: false
+    # steps:
+    # - name: Checkout gitops repo
+    #   uses: actions/checkout@v3
+    #   with:
+    #     repository: Orisade2003/gitops-devops-project
+    #     token: ${{ secrets.GITOPS_REPO_TOKEN }} # Use a token with the appropriate permissions
+        # set-safe-directory: false
         # path: other-repo # Optional: Specify the directory where the repo should be checked out
     
-    # - name: Install yq
-    #   run: |
-    #     sudo apt-get update
-    #     sudo apt-get install -y yq
+    - name: Git Clone
+      run: |
+        git clone https://${{ secrets.GITOPS_REPO_TOKEN }}@github.com/Orisade2003/gitops-devops-project.git
 
     - name: Change value in YAML file
       run: |
