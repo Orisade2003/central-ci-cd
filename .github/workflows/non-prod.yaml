@@ -73,6 +73,11 @@ jobs:
       image: dellnoantechnp/git-yq:latest
     # needs: build # add
     steps:
+    - name: CD
+      run: |
+        pwd
+        cd ..
+        pwd
     - name: Checkout gitops repo
       uses: actions/checkout@v3
       with:
