@@ -78,7 +78,6 @@ jobs:
       with:
         repository: Orisade2003/gitops-devops-project
         token: ${{ secrets.GITOPS_REPO_TOKEN }} # Use a token with the appropriate permissions
-        set-safe-directory: false
 
     - name: Change value in YAML file
       run: |
