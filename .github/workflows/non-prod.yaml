@@ -73,18 +73,14 @@ jobs:
       image: dellnoantechnp/git-yq:latest
     # needs: build # add
     steps:
-    - name: CD
-      run: |
-        pwd
-        cd ..
-        cd ..
-        pwd
     - name: Checkout gitops repo
       uses: actions/checkout@v3
       with:
         repository: Orisade2003/gitops-devops-project
         token: ${{ secrets.GITOPS_REPO_TOKEN }} # Use a token with the appropriate permissions
-
+    - name: Mark directory as safe
+      run: |
+        git config --global --add safe.directory $(pwd)
     - name: Change value in YAML file
       run: |
         yq e '.image.tag = "cba1df93eb833a5cf5721320d68fd1839dfc79ea"' -i environments/dev/values/microservice-devops-values.yaml
