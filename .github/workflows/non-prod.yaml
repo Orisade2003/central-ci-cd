@@ -82,7 +82,6 @@ jobs:
       with:
         repository: Orisade2003/gitops-devops-project
         token: ${{ secrets.GITOPS_REPO_TOKEN }} # Use a token with the appropriate permissions
-        path: ./../..
     - name: Mark directory as safe
       run: |
         git config --global --add safe.directory $(pwd)
