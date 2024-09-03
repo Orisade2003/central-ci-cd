@@ -73,7 +73,7 @@ jobs:
     runs-on: [self-hosted]
     container:
       image: dellnoantechnp/git-yq:latest
-    needs: build # add
+    needs: scan # add
     steps:
     - name: Checkout gitops repo
       uses: actions/checkout@v3
