@@ -86,7 +86,10 @@ jobs:
         yq e '.image.tag = "cba1df93eb833a5cf5721320d68fd1839dfc79ea"' -i environments/dev/values/microservice-devops-values.yaml
 
     - name: Commit changes
+      env:
+        GIT_SAFE_DIR: ${{ github.workspace }}
       run: |
+        git config --global --add safe.directory $GITHUB_WORKSPACE
         git status
         git config --local user.name "GitHub Actions"
         git config --local user.email "actions@github.com"
