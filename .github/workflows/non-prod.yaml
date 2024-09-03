@@ -89,8 +89,6 @@ jobs:
       env:
         GIT_SAFE_DIR: ${{ github.workspace }}
       run: |
-        git config --global --add safe.directory $GITHUB_WORKSPACE
-        git status
         git config --local user.name "GitHub Actions"
         git config --local user.email "actions@github.com"
         git add environments/dev/values/${{inputs.app-name}}-values.yaml
