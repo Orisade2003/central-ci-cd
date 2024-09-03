@@ -74,6 +74,7 @@ jobs:
     runs-on: [self-hosted]
     container:
       image: dellnoantechnp/git-yq:latest
+      options: --user root
     needs: scan # add
     steps:
     - name: Checkout gitops repo
