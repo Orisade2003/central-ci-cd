@@ -72,9 +72,6 @@ jobs:
 
   delpoy-dev:
     runs-on: [self-hosted]
-    container:
-      image: dellnoantechnp/git-yq:latest
-      options: --user root
     needs: scan # add
     steps:
     - name: Checkout gitops repo
@@ -82,10 +79,8 @@ jobs:
       with:
         repository: Orisade2003/gitops-devops-project
         token: ${{ secrets.GITOPS_REPO_TOKEN }} # Use a token with the appropriate permissions
-    - name: Mark directory as safe
-      run: |
-        git config --global --add safe.directory $(pwd)
-    - name: Change value in YAML file
+    - name: Edit yaml
+      uses: mikefarah/yq@v4.44.3
       run: |
         yq e '.image.tag = "${{ github.sha }}"' -i ${{inputs.values-path}}
 
