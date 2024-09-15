@@ -27,6 +27,7 @@ env:
 jobs:
   build:
     runs-on: [self-hosted]
+
     steps:
     # Check out the repository
     - name: Echo the environment variable
@@ -75,6 +76,7 @@ jobs:
 
   delpoy-dev:
     runs-on: [self-hosted]
+    environment: dev
     needs: scan # add
     steps:
     - name: Checkout gitops repo
