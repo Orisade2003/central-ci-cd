@@ -81,8 +81,7 @@ jobs:
         token: ${{ secrets.GITOPS_REPO_TOKEN }} # Use a token with the appropriate permissions
     - name: Edit yaml
       uses: mikefarah/yq@v4.44.3
-      cmd: |
-        yq e '.image.tag = "${{ github.sha }}"' -i ${{inputs.values-path}}
+        cmd: yq e '.image.tag = "${{ github.sha }}"' -i ${{inputs.values-path}}
 
     - name: Commit changes
       env:
