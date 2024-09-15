@@ -11,6 +11,9 @@ on:
       values-path:
         required: true
         type: string
+      gitops-repo:
+        required: true
+        type: string
     secrets:
       DOCKERHUB_USERNAME:
         required: true
@@ -77,7 +80,7 @@ jobs:
     - name: Checkout gitops repo
       uses: actions/checkout@v3
       with:
-        repository: Orisade2003/gitops-devops-project
+        repository: ${{inputs.gitops-repo}}
         token: ${{ secrets.GITOPS_REPO_TOKEN }} # Use a token with the appropriate permissions
     - name: Edit yaml
       uses: mikefarah/yq@v4.44.3
