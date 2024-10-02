@@ -87,7 +87,7 @@ jobs:
     - name: Print env
       uses: mikefarah/yq@v4.44.3
       with:
-        cmd: echo ${{var.ENV_NAME}}
+        cmd: echo ${{vars.ENV_NAME}}
     - name: Edit yaml
       uses: mikefarah/yq@v4.44.3
       with:
