@@ -89,6 +89,8 @@ jobs:
       with:
         cmd: echo ${{vars.ENV_NAME}}
     - name: Edit yaml
+      env:
+          ENV_NAME: ${{vars.ENV_NAME}}
       uses: mikefarah/yq@v4.44.3
       with:
         cmd: yq e '.image.tag = "${{ github.sha }}"' -i ${{inputs.values-path}}
