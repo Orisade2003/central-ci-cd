@@ -88,19 +88,19 @@ jobs:
       uses: mikefarah/yq@v4.44.3
       with:
         cmd: echo ${{vars.ENV_NAME}}
+    - name: set env
+      run: echo "VALUES_PATH = $(echo '${{ inputs.gitops_values_path }}' | sed 's/{ENV_NAME}/dev/')" >> $GITHUB_ENV
     - name: Edit yaml
-      env:
-          PATH:  echo ${{ inputs.gitops_values_path }} | sed 's/{env_name}/dev/'
       uses: mikefarah/yq@v4.44.3
       with:
-        cmd: yq e '.image.tag = "${{ github.sha }}"' -i ${{env.PATH}}
+        cmd: yq e '.image.tag = "${{ github.sha }}"' -i ${{env.VALUES_PATH}}
     - name: Commit changes
       env:
         GIT_SAFE_DIR: ${{ github.workspace }}
       run: |
         git config --local user.name "GitHub Actions"
         git config --local user.email "actions@github.com"
-        git add ${{env.PATH}}
+        git add ${{env.VALUES_PATH}}
         git commit -m "Update tag in values file to ${{ github.sha }}"
         git push
 
