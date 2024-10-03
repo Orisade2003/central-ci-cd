@@ -89,7 +89,7 @@ jobs:
       with:
         cmd: echo ${{vars.ENV_NAME}}
     - name: set env
-      run: echo "VALUES_PATH = $(echo '${{ inputs.gitops_values_path }}' | sed 's/{ENV_NAME}/dev/')" >> $GITHUB_ENV
+      run: echo "VALUES_PATH=$(echo '${{ inputs.gitops_values_path }}' | sed 's/{ENV_NAME}/dev/')" >> $GITHUB_ENV
     - name: Edit yaml
       uses: mikefarah/yq@v4.44.3
       with:
